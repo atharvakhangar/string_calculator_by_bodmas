@@ -33,7 +33,7 @@ bool bot(string n, char o)
     int i;
     for(i=0;i<size(n);i++)
     {
-       if(n[i]==o)
+        if(n[i]==o)
         return true;
     }
     return false;
