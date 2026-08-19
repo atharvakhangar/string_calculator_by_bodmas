@@ -4,4 +4,3 @@ using namespace std;
 
 int checkeq(string n);
 int checkdeci(string n);
-void checkob(string &n);

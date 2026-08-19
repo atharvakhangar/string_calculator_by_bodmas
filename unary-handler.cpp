@@ -6,9 +6,10 @@ using namespace std;
 #include"complex.h"
 
 //opserch: operator sercher it search for multiply able operator
-int opserch(string &n, int &p)
+int opserch(string &n)
 {
     string t;
+    int p=0;
     n.append(" ");
     int k=n.length()-1, i;
     for(i=0; i<k; i++)
@@ -25,7 +26,7 @@ int opserch(string &n, int &p)
             else
             {
                 t=opsol(n[i], n[i+1], p=i, n);
-                if(t == "e")
+                if(t == "error")
                     return 1;
                 n.replace(i, 2, t);
                 k=n.length()-1;
@@ -72,8 +73,7 @@ string opsol(char a, char b, int i, string &n)
 
     else
     {
-        cout << "Iavild Input";
-        return "e";
+        return "error";
     }
 }
 

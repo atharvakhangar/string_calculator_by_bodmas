@@ -1,5 +1,7 @@
 #include "complex.h"
 #include "basicmath.h"
+#include "mix.h"
+#include "unary-handler.h"
 
 #include <iostream>
 #include <string>
@@ -31,10 +33,18 @@ void smeq(string &n)
 bool bot(string n, char o)
 {
     int i;
-    for(i=0;i<size(n);i++)
+    for(i=0;i<n.size();i++)
     {
         if(n[i]==o)
-        return true;
+        {
+            if(o=='+' || o=='-')
+            {
+                if(i!=0)
+                return true;
+            }
+            else
+            return true;
+        }
     }
     return false;
 }
@@ -44,11 +54,28 @@ void exeq(string &n, char o)
 {
     int i=0, j=0, k=0, t;
     string p="";
-    for(i=0;i<size(n);i++)
+    cout<<"\nreciving str to exeq"<<n;
+    cout<<"\n OP insearch"<<o;
+    for(i=0;i<n.size();i++)
     {
         if(n[i]==o)
-        break;
+        {
+            if(o=='+' || o=='-')
+            {
+                if(i!=0)
+                {
+                    t=i;
+                    break;
+                }
+            }
+            else
+            {
+                t=i;
+                break;
+            }
+        }
     }
+    cout<<"\n OP loc ditected"<<t;
     t=i;
     for(i=t-1;i>=0;i--)
     {
@@ -58,10 +85,16 @@ void exeq(string &n, char o)
         }
         else if(n[i]=='+' || n[i]=='-' || n[i]=='*' || n[i]=='/')
         {
+            if(n[i]=='-')
+            {
+                j=i;
+                break;
+            }
             j=i+1;
             break;
         }
     }
+    cout<<"\n lower end"<<j;
     for(i=t+1;i<=size(n);i++)
     {
         if(i==size(n))
@@ -74,13 +107,15 @@ void exeq(string &n, char o)
             break;
         }
     }
+    cout<<"\n upper end"<<k;
     for(i=j;i<=k;i++)
     p+=n[i];
+    cout<<"\nexeq string"<<p;
     n.replace(j, k-j+1, alot(p, o));
 }
 
 //alot: it alot numbericalls to float from stringa nd operators to char o so it can execute oprations
-string alot(string &n, char o)
+string alot(string n, char o)
 {
     string t;
     int i;
@@ -88,20 +123,26 @@ string alot(string &n, char o)
     t.clear();
     for(i=0;i<size(n);i++)
     {
-        if(isdigit(n[i]) || n[i]=='.')
+        if(n[i]=='-' || n[i]=='+')
         t+=n[i];
-        else
-        break;
+        else if(isdigit(n[i]) || n[i]=='.')
+        {
+            t+=n[i];
+            if(!isdigit(n[i+1]) && n[i+1]!='.')
+                break;
+        }
     }
+    cout<<"\nAA"<<t;
     a=stof(t);
     t.clear();
-    for(i=i+1;i<size(n);i++)
+    for(i=i+2;i<size(n);i++)
     {
         if(isdigit(n[i]) || n[i]=='.')
         t+=n[i];
         else
         break;
     }
+    cout<<"\nBB"<<t;
     b=stof(t);
     t.clear();
     t=con(cal(a, o, b));
@@ -113,7 +154,7 @@ string con(float t)
 {
     string k;
     k=to_string(t);
-    return k;
+    return ("+"+k);
 }
 
 //space terminator : check entire string and delete all spaces
@@ -137,15 +178,21 @@ void sols(string &n)
 {
         while(true)
     {
-        if(bot(n,'/'))
-        exeq(n, '/');
-        else if(bot(n,'*'))
-        exeq(n, '*');
-        else if(bot(n, '+'))
-        exeq(n, '+');
-        else if(bot(n, '-'))
-        exeq(n, '-');
+        if(mixchecksol(n))
+        {
+            opserch(n);
+            if(bot(n,'/'))
+            exeq(n, '/');
+            else if(bot(n,'*'))
+            exeq(n, '*');
+            else if(bot(n, '+'))
+            exeq(n, '+');
+            else if(bot(n, '-'))
+            exeq(n, '-');
+            else
+            break;
+        }
         else
-        break;
+            break;   
     }
 }
