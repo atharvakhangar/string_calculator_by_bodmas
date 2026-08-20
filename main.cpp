@@ -36,8 +36,9 @@ int main()
     {
         while(true)
         {
-            cout<<"\n"<<opserch(c)<<"\n";
-            cout<<"Soultion to this equation is\n"<<c;
+            // cout<<"\n"<<opserch(c)<<"\n";
+            // cout<<"Soultion to this equation is\n"<<c;
+            opserch(c);
             if(mixchecksol(c))
             {
                 if(bot(c, '('))
@@ -49,7 +50,7 @@ int main()
             }
             else
                 break;
-            cout<<"\n"<<c<<"\n";
+            // cout<<"\n"<<c<<"\n";
         }
         cout<<"Soultion to this equation is\n"<<c;
         getch();

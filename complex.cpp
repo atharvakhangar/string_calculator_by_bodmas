@@ -54,8 +54,8 @@ void exeq(string &n, char o)
 {
     int i=0, j=0, k=0, t;
     string p="";
-    cout<<"\nreciving str to exeq"<<n;
-    cout<<"\n OP insearch"<<o;
+    // cout<<"\nreciving str to exeq"<<n;
+    // cout<<"\n OP insearch"<<o;
     for(i=0;i<n.size();i++)
     {
         if(n[i]==o)
@@ -75,7 +75,7 @@ void exeq(string &n, char o)
             }
         }
     }
-    cout<<"\n OP loc ditected"<<t;
+    // cout<<"\n OP loc ditected"<<t;
     t=i;
     for(i=t-1;i>=0;i--)
     {
@@ -94,7 +94,7 @@ void exeq(string &n, char o)
             break;
         }
     }
-    cout<<"\n lower end"<<j;
+    // cout<<"\n lower end"<<j;
     for(i=t+1;i<=size(n);i++)
     {
         if(i==size(n))
@@ -107,10 +107,10 @@ void exeq(string &n, char o)
             break;
         }
     }
-    cout<<"\n upper end"<<k;
+    // cout<<"\n upper end"<<k;
     for(i=j;i<=k;i++)
     p+=n[i];
-    cout<<"\nexeq string"<<p;
+    // cout<<"\nexeq string"<<p;
     n.replace(j, k-j+1, alot(p, o));
 }
 
@@ -132,7 +132,7 @@ string alot(string n, char o)
                 break;
         }
     }
-    cout<<"\nAA"<<t;
+    // cout<<"\nAA"<<t;
     a=stof(t);
     t.clear();
     for(i=i+2;i<size(n);i++)
@@ -142,7 +142,7 @@ string alot(string n, char o)
         else
         break;
     }
-    cout<<"\nBB"<<t;
+    // cout<<"\nBB"<<t;
     b=stof(t);
     t.clear();
     t=con(cal(a, o, b));
